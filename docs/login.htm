@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=UTF-8"utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>网站数据管理后台登录 - 初阳教育咨询有限公司</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link href="bootstrap.min.css-_v=202107161616.css" tppabs="https://static.xcx.gw66.vip/css/bootstrap.min.css?_v=202107161616" rel="stylesheet">
+    <link href="font-awesome.min.css" tppabs="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="ionicons.min.css" tppabs="http://cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+    <link href="AdminLTE.min.css" tppabs="http://cdn.bootcss.com/admin-lte/2.3.8/css/AdminLTE.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="layui.css-_v=202107161616.css" tppabs="https://static.xcx.gw66.vip/assets/layui/css/layui.css?_v=202107161616">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="html5shiv.min.js" tppabs="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="respond.min.js" tppabs="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        input, button, textarea, select, option {
+            border: none;
+            outline: none;
+        }
+
+        ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+          font-size:14px;
+          color:rgba(187,187,187,1);
+
+        }
+
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+          font-size:14px;
+          color:rgba(187,187,187,1);
+        }
+
+        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+          font-size:14px;
+          color:rgba(187,187,187,1);
+        }
+
+        :-ms-input-placeholder { /* Internet Explorer 10-11 */
+          font-size:14px;
+          color:rgba(187,187,187,1);
+        }
+
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      
+      /*定义滑块 内阴影+圆角*/
+      ::-webkit-scrollbar-thumb {
+        background: rgba(0,0,0,0.2);
+        border-radius: 10px;
+      }
+      .dialog {
+        width: 896px;
+        height: 652px;
+        background: rgba(255,255,255,1);
+        box-shadow: 0px 2px 12px 0px rgba(0,0,0,0.3);
+        border-radius: 16px;
+        z-index: 1;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-left: -448px;
+        margin-top: -326px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 64px 40px 54px;
+        box-sizing: border-box;
+      }
+      .dialog-title {
+        font-size: 20px;
+        font-weight:400;
+        color:rgba(0,0,0,1);
+        margin-block-start: 0px;
+        margin-block-end: 0px;
+      }
+      .dialog-main {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 32px;
+      }
+      .dialog-div {
+        width: 360px;
+        height: 514px;
+        background:rgba(255,255,255,1);
+        box-shadow: 0px 2px 12px 0px rgba(0,0,0,0.1);
+        font-size: 14px;
+        line-height: 20px;
+        overflow-y: scroll;
+        padding: 24px;
+        box-sizing: border-box;
+        font-weight:400;
+        color:rgba(0,0,0,0.85);
+      }
+      .dialog-text {
+        text-indent: 25px;
+        margin-block-start: 0px;
+        margin-block-end: 16px;
+      }
+      .single-p {
+        cursor: pointer;
+        width: 312px;
+        height: auto;
+        background: rgba(255,255,255,1);
+        border-radius: 8px;
+        margin-bottom: 16px;
+      }
+      .single-p-show {
+        box-shadow: 0px 2px 12px 0px rgba(138,53,255,0.1);
+      }
+      .s-title {
+        width: 100%;
+        height: 48px;
+        background: rgba(255,255,255,1);
+        border-radius: 8px 8px 0px 0px;
+        padding: 12px 12px 12px 16px;
+        display: flex;
+        box-sizing: border-box;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .s-title-div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+      .title-cricle {
+        width: 24px;
+        height: 24px;
+        background: rgba(118,113,241,1);
+        border-radius: 50%;
+        margin-right: 8px;
+        text-align: center;
+        line-height: 26px;
+        font-weight: bold;
+        color: #fff;
+        font-size: 14px;
+      }
+      .s-cricle {
+        width: 18px;
+        height: 18px;
+        font-size: 16px;
+        border: 1px solid rgb(224 224 224);
+        border-radius: 50%;
+        color: rgb(224 224 224);
+        justify-content: center;
+        display: flex;
+        align-items: center;
+      }
+      .content-div {
+        min-height: 128px;
+        height: auto;
+        width: 100%;
+        padding: 12px 24px;
+        box-sizing: border-box;
+      }
+      .content-text {
+        font-size:12px;
+        color:rgba(97,104,124,1);
+        line-height:18px;
+        margin-block-start: 0px;
+        margin-block-end: 0px;
+      }
+      .subheading {
+        color:rgba(48,49,51,1);
+        margin-block-start: 0px;
+        margin-block-end: 12px;
+      }
+      .iphone-style {
+        display: flex;
+        flex-direction: column;
+      }
+      .dialog-div-info {
+        width: 360px;
+        height: 514px;
+        box-sizing: border-box;
+        padding-top: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+      .input-title {
+        display: flex;
+        flex-direction: column;
+        font-size: 15px;
+        font-weight:400;
+        color: rgba(102,102,102,1);
+        margin-bottom: 24px;
+      }
+      .input-title p {
+        margin-block-start: 0px;
+        margin-block-end: 8px;
+      }
+      
+      .compandy-input {
+        width: 100%;
+        height: 48px;
+        background:rgba(255,255,255,1);
+        box-shadow: 0px 1px 0px 0px rgba(221,221,221,1);
+        padding-top: 13px;
+        padding-bottom: 15px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+      }
+      .tips {
+        color:rgba(233,95,95,1);
+        margin-left: 4px;
+      }
+      .iphone-input {
+        width: 100%;
+        height: 40px;
+        background: rgba(255,255,255,1);
+        border-radius: 2px;
+        border: 1px solid rgba(221,221,221,1);
+        box-sizing: border-box;
+        padding-right: 120px;
+        padding-left: 16px;
+      }
+      .tips-text {
+        width: 360px;
+        font-size: 12px;
+        font-weight: 400;
+        color: rgba(97,104,124,1);
+        line-height: 20px;
+        margin-top: 30px;
+        margin-bottom: 24px;
+      }
+      .icon {
+        width: 16px;
+        height: 16px;
+        background: rgba(66,74,94,1);
+        border-radius: 50%;
+        color: #fff;
+        display: inline-block;
+        font-style: normal;
+        text-align: center;
+        font-size: 12px;
+        margin-right: 4px;
+      }
+      .btn-div {
+        display: flex;
+        flex-direction: row;
+        float: right;
+      }
+      .close {
+        width: 112px;
+        height: 40px;
+        border-radius: 4px;
+        border: 1px solid rgb(191, 191, 191);
+        margin-right: 24px;
+        font-size:14px;
+        font-weight:400;
+        color:#909399;
+        text-align: center;
+        line-height: 40px;
+        cursor: pointer;
+      }
+      .save {
+        width: 98px;
+        height: 40px;
+        background: linear-gradient(135deg,rgba(190,101,255,1) 0%,rgba(138,53,255,1) 100%);
+        border-radius: 4px;
+        font-size:14px;
+        font-weight:400;
+        color:rgba(255,255,255,1);
+        text-align: center;
+        line-height: 40px;
+        cursor: pointer;
+      }
+      .code {
+        width: 112px;
+        height: 16px;
+        border-left: 1px solid rgba(221,221,221,1);
+        color:rgba(118,113,241,1);
+        position: relative;
+        top: -28px;
+        left: 246px;
+        background: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        line-height: 16px;
+      }
+      .err-trip {
+        color:rgba(233,95,95,1);
+        font-size: 12px;
+      }
+
+      .dialogBg {
+        z-index: 0;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        height: calc(100vh);
+        width: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: block;
+        font-size: 0.28rem;
+        line-height: calc(60vh);
+        text-align: center;
+      }
+      .help-trip-phone {
+          margin-top: -10px;
+      }
+      .help-trip-code {
+          margin-top: 10px;
+      }
+      .main-title {
+        color:rgba(0,0,0,1);
+      }
+      .main-title-show {
+        color:rgba(118,113,241,1);
+      }
+      .login-box-body {
+        height: 360px;
+      }
+      .form-control {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        height: 36px;
+      }
+      .btn-primary {
+        background-color: #9552d0;
+        border-color: #9552d0;
+      }
+      .btn {
+        padding: 8px 12px;
+        margin-top: 30px;
+        border-radius: 20px !important;
+      }
+      .btn:focus, .btn:hover {
+        background-color: #9552d0 !important;
+        border-color: #9552d0 !important;
+      }
+      .layui-this {
+        color: #9552d0 !important;
+      }
+      .layui-this:after {
+        border-bottom: 2px solid #9552d0 !important;
+      }
+      .codeInput {
+        width: 100%;
+        display: inline-block;
+      }
+      .codeBtn {
+        width: 100px;
+        padding: 9px;
+        border: 1px solid #9552d0;
+        display: inline-block;
+        background: #9552d0;
+        color: #fff;
+        font-size: 12px;
+        word-break: keep-all;
+      }
+      .form-group {
+        display: flex;
+      }
+    </style>
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+    <div class="login-logo">
+        初阳教育咨询有限公司
+    </div>
+    <div class="login-box-body">
+        <p class="login-box-msg">初阳教育咨询有限公司后台管理登录</p>
+        <form action="http://www.chuyangedu.com/admin/newLogin" class="js-form" method="post">
+          <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+              <li class="layui-this">密码登录</li>
+              <li>手机登录</li>
+            </ul>
+            <div class="layui-tab-content" style="height: 200px;margin-top: 15px">
+              <div class="form-group has-feedback js-error js-error-name">
+                  <input name="name" type="text" class="form-control" placeholder="用户名/邮箱/手机">
+                  <span class="help-block js-help-block"></span>
+              </div>
+              <div class="layui-tab-item layui-show">
+                <div class="form-group has-feedback js-error js-error-passwd">
+                  <input name="passwd" type="password" class="form-control" placeholder="密码">
+                  <span class="help-block js-help-block"></span>
+                </div>
+              </div>
+              <div class="layui-tab-item">
+                <div class="form-group has-feedback js-error js-error-code">
+                  <input name="phoneCode" type="text" class="form-control codeInput" placeholder="手机验证码">
+                  <button type="button" id="phone-code-btn" class="codeBtn">获取验证码</button>
+                  <span class="help-block js-help-block"></span>
+                </div>
+              </div>
+              <button type="submit" class="js-submit btn btn-primary btn-block btn-flat">登录</button>
+            </div>
+          </div>
+        </form>
+    </div>
+</div>
+<div class="dialog">
+    <p class="dialog-title">系统升级公告</p>
+    <div class="dialog-main">
+        <div class="dialog-div">
+            尊敬的用户：<br>
+            您好！<br>
+            <p class="dialog-text">为提供更好的企业服务，本系统将原“网站管理”功能模块进行了重大升级，此次升级不收取任何费用，并提供了更多强大易用的企业营销应用。</p>
+            <p>更新介绍：</p>
+
+            <div class="single-p">
+                <div class="s-title">
+                    <div class="s-title-div">
+                        <i class="title-cricle layui-icon">&#xe605;</i>
+                        <span class="main-title">全新网站编辑器</span>
+                    </div>
+                    <i class="s-cricle layui-icon">+</i>
+                </div>
+                <div class="content-div">
+                    <p class="subheading">“繁杂代码抛脑后，自由拖拽更轻松”</p>
+                    <p class="content-text">本次升级提供了全新版本的网站编辑器，组件多样，拖拽式编辑，方便快捷，能够实现更复杂的页面功能，同时可以兼容原网站的编辑，不必担心之前的编辑用不上啦~</p>
+                </div>
+            </div>
+
+            <div class="single-p">
+                <div class="s-title">
+                    <div class="s-title-div">
+                        <i class="title-cricle layui-icon">&#xe605;</i>
+                        <span class="main-title">官网直播</span>
+                    </div>
+                    <i class="s-cricle layui-icon">+</i>
+                </div>
+                <div class="content-div">
+                    <p class="subheading">“直播带货在官网，私域会员争相拥”</p>
+                    <p class="content-text">“又有新的宝贝上线啦！快来官网直播带货，把好东西安利给你的小伙伴！”本次升级新增“官网直播”的功能，运用企业自己的私域直播，精准面向自己的客户，将好货真正推销给对的人！~</p>
+                </div>
+            </div>
+
+            <div class="single-p">
+                <div class="s-title">
+                    <div class="s-title-div">
+                        <i class="title-cricle layui-icon">&#xe605;</i>
+                        <span class="main-title">社交商城</span>
+                    </div>
+                    <i class="s-cricle layui-icon">+</i>
+                </div>
+                <div class="content-div">
+                    <p class="subheading">“全网营销一体化，商城分销做更大”</p>
+                    <p class="content-text">本次升级新增“小程序商城”的功能，利用微信小程序，通过全网进行商品发布营销，实现全网营销、统一管理；更能支持分销推广，通过社交传播、分享裂变。操作便捷，流程简单，让商城经营更轻松。~</p>
+                </div>
+            </div>
+
+            <div class="single-p">
+                <div class="s-title">
+                    <div class="s-title-div">
+                        <i class="title-cricle layui-icon">&#xe605;</i>
+                        <span class="main-title">智能社交名片</span>
+                    </div>
+                    <i class="s-cricle layui-icon">+</i>
+                </div>
+                <div class="content-div">
+                    <p class="subheading">“智能社交第一步，电子名片来开路”</p>
+                    <p class="content-text">纸质名片不方便？疫情一来宅家躲，何来名片面对面！正到愁时无需愁，电子名片来相见！本次升级新增“智能社交名片”的功能，是基于微信生态开发的新一代智能社交电子名片，高效管理企业与官网，树立企业形象。~</p>
+                </div>
+            </div>
+
+            <div class="single-p">
+            <div class="s-title">
+                <div class="s-title-div">
+                    <i class="title-cricle layui-icon">&#xe605;</i>
+                    <span class="main-title">意向客户管理</span>
+                </div>
+                <i class="s-cricle layui-icon">+</i>
+            </div>
+            <div class="content-div">
+                <p class="subheading">“客户线索易可知，意向商机不错失”</p>
+                <p class="content-text">本次升级新增“意向客户管理”的功能，通过对商城、名片的浏览记录寻找到线索信息，实时跟进，询问意向，发现商机，轻松获客！~</p>
+            </div>
+            </div>
+
+            <div class="single-p">
+            <div class="s-title">
+                <div class="s-title-div">
+                    <i class="title-cricle layui-icon">&#xe605;</i>
+                    <span class="main-title">移动端APP</span>
+                </div>
+                <i class="s-cricle layui-icon">+</i>
+            </div>
+            <div class="content-div">
+                <p class="subheading">“一网打尽新功能，移动营销更智能”</p>
+                <p class="content-text">针对此次升级的新功能，开发了移动端的APP，轻松营销获客，真正实现“一部手机管理公司”~</p>
+            </div>
+            </div>
+        </div>
+        <div class="dialog-div-info">
+            <div>
+                <div class="input-title">
+                    <p>您所在的公司/团队名称<span class="tips">*</span></p>
+                    <input name="company" type="text" class="compandy-input" placeholder="请输入您所在的公司/团队名称">
+                    <span class="help-trip-company err-trip"></span>
+                </div>
+                <p class="tips-text"><i class="icon">!</i>应国家公安部《网络安全法》的要求，我们将进一步强化系统账户实名认证机制，请绑定您登录的手机号，我们承诺不会向任何第三方泄露您的个人信息，感谢谢您的支持和配合。</p>
+                <div class="input-title">
+                    <p>手机<span class="tips">*</span></p>
+                    <input name="mobile" type="text" class="iphone-input" placeholder="请输入您登录使用的手机号">
+                    <button type="button" id="code-btn" class="code">验证码</button>
+                    <span class="help-trip-phone err-trip"></span>
+                </div>
+                <div class="input-title">
+                    <p>验证码<span class="tips">*</span></p>
+                    <input name="code" type="text" class="iphone-input" placeholder="请输入验证码">
+                    <span class="help-trip-code err-trip"></span>
+                </div>
+            </div>
+            <div class="btn-div">
+                <div class="close">退出登录</div>
+                <div class="save">提交</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="dialogBg"></div>
+
+<script src="jquery.min-1.js-_v=202107161616" tppabs="https://static.xcx.gw66.vip/assets/cdn/jquery/2.2.4/jquery.min.js?_v=202107161616"></script>
+<script src="bootstrap.min-1.js-_v=202107161616" tppabs="https://static.xcx.gw66.vip/assets/cdn/bootstrap/3.3.7/js/bootstrap.min.js?_v=202107161616"></script>
+<script src="fastclick.min.js-_v=202107161616" tppabs="https://static.xcx.gw66.vip/assets/cdn/fastclick/1.0.6/fastclick.min.js?_v=202107161616"></script>
+<script src="layui.js-_v=202107161616" tppabs="https://static.xcx.gw66.vip/assets/layui/layui.js?_v=202107161616"></script>
+
+<script>
+    var mobile = $("input[name= 'mobile']").val()
+    var reg_phone = /^1[3,4,5,6,7,8,9]\d{9}$/
+    var admin_id = 0
+    var company_name = ''
+    $(function(){
+        $('.content-div').hide()
+        $('.dialog').hide()
+        $('.dialogBg').hide()
+    })
+    layui.use(['layer', 'element'], function(){
+      var $ = layui.jquery,
+          layer = layui.layer,
+          element = layui.element
+
+
+          $(document).on("submit", ".js-form", function(){
+
+              var $this = this,
+                  $url = $(this).prop('action'),
+                  $method = $(this).prop('method')
+                      
+
+              $($this).find(".js-error").removeClass("has-error")
+              $($this).find(".js-error").children(".js-help-block").hide()
+
+              if ($("input[name= 'name']").val() == '') {
+                  $(".js-error-name").addClass("has-error")
+                  $(".js-error-name").children(".js-help-block").show().html('用户名/邮箱/手机不能为空')
+              }
+
+              if ($('.layui-this').text() === '密码登录') {
+                if ($("input[name= 'passwd']").val() == '') {
+                  $(".js-error-passwd").addClass("has-error")
+                  $(".js-error-passwd").children(".js-help-block").show().html('密码不能为空')
+                }
+                if ($("input[name= 'name']").val() !== '' && $("input[name= 'passwd']").val() !== '') {
+                    var $request = $.ajax({
+                        url : $url,
+                        method : $method,
+                        data : {
+                          name: $("input[name= 'name']").val(),
+                          passwd: $("input[name= 'passwd']").val()
+                        },
+                        dataType : "json",
+                        success: function(res){
+                            layer.msg(res.msg)
+                            if(res.code === 0) {
+                                window.open(res.data.redirect_url, '_self')
+                            } else if (res.code === 10003) {
+                                admin_id = res.data.admin_id
+                                $('.dialog').show()
+                                $('.dialogBg').show()
+                                $.ajax({
+                                    type: 'get',
+                                    dataType: 'json',
+                                    url: '/api/epower/info',
+                                    success: function (res) {
+                                        if (res.code === 0) {
+                                            company_name = res.data.company.name
+                                            $("input[name= 'company']").val(company_name)
+                                        }
+                                    }
+                                })
+                            }
+                        }
+                    });
+                }
+
+              } else {
+                if ($("input[name= 'phoneCode']").val() == '') {
+                  $(".js-error-code").addClass("has-error")
+                  $(".js-error-code").children(".js-help-block").show().html('验证码不能为空')
+                }
+                if ($("input[name= 'name']").val() !== '' && $("input[name= 'phoneCode']").val() !== '') {
+                    var $request = $.ajax({
+                        url : '/admin/adminMerchantLogin',
+                        method : 'post',
+                        data : {
+                          name: $("input[name= 'name']").val(),
+                          code: $("input[name= 'phoneCode']").val()
+                        },
+                        dataType : "json",
+                        success: function(res){
+                            layer.msg(res.msg)
+                            if(res.code === 0) {
+                              window.open(res.data.redirect_url, '_self')
+                            }
+                        }
+                    });
+                }
+              }
+
+              return false
+              });
+
+
+              $(document).off('click', '#phone-code-btn').on('click', '#phone-code-btn', function () {
+                let count = 60
+                let phone = $("input[name= 'name']").val()
+                if (!reg_phone.test(phone)) {
+                  $(".js-error-name").addClass("has-error")
+                  $(".js-error-name").children(".js-help-block").show().html('用户名/邮箱/手机不能为空')
+                  return false
+                }
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    url: '/api/user/checkMobile',
+                    data: {
+                      mobile: phone
+                    },
+                    success: function (res) {
+                      if (res.code === 0) {
+                        if (res.data.type === 1) {
+                          $.ajax({
+                            type: "post",
+                            dataType: "json",
+                            url: '/admin/adminMerchantSendSms',
+                            data: {
+                                mobile: phone,
+                                type: 'login'
+                            },
+                            success: function (res) {
+                                if (res.code !== 0) {
+                                  layer.msg('您的手机号不是该网站管理员，请通过 “密码登录” 去登录', {
+                                    time: 4000
+                                  }, function(){
+                                    $('.layui-tab-title').children().eq(0).addClass("layui-this")
+                                    $('.layui-tab-title').children().eq(1).removeClass("layui-this")
+                                    $('.layui-tab-item').eq(0).addClass("layui-show")
+                                    $('.layui-tab-item').eq(1).removeClass("layui-show")
+                                  })
+                                  return false
+                                } else {
+                                  layer.msg(res.msg)
+                                  $("#phone-code-btn").attr('disabled', 'disabled')
+                                  $("#phone-code-btn").html(count + "s")
+                                  $(".js-error-name").removeClass("has-error")
+                                    $(".js-error-name").children(".js-help-block").hide()
+                                  var timer = setInterval(function () {
+                                      count--
+                                      $("#phone-code-btn").html(count + "s")
+                                      if (count == 0) {
+                                          clearInterval(timer)
+                                          $("#phone-code-btn").attr("disabled", false)
+                                          $("#phone-code-btn").html("重新发送")
+                                      }
+                                  }, 1000)
+                                }
+                            }
+                          })
+                        } else {
+                          layer.msg('验证码获取失败')
+                        }
+                      }
+                    }
+                })
+              })
+
+
+              $(document).off('click', '#code-btn').on('click', '#code-btn', function () {
+              let count = 60
+              mobile = $("input[name= 'mobile']").val()
+              if (!reg_phone.test(mobile)) {
+                  $('.help-trip-phone').show().html("请输入正确手机号")
+                  return false
+              }
+              $("#code-btn").attr('disabled', 'disabled')
+              $("#code-btn").html(count + "s")
+              $('.help-trip-phone').hide()
+              $.ajax({
+                  type: "post",
+                  dataType: "json",
+                  url: '/admin/adminMerchantSendSms',
+                  data: {
+                      mobile: mobile,
+                      type: 'admin_bind_merchant'
+                  },
+                  success: function (res) {
+                      if (res.code === 0) {
+                          layer.msg(res.msg)
+                      }
+                  }
+              })
+              var timer = setInterval(function () {
+                  count--
+                  $("#code-btn").html(count + "s")
+                  if (count == 0) {
+                      clearInterval(timer)
+                      $("#code-btn").attr("disabled", false)
+                      $("#code-btn").html("重新发送")
+                  }
+              }, 1000)
+
+              })
+
+
+              $(document).off('click', '.save').on('click', '.save', function () {
+              mobile = $("input[name= 'mobile']").val()
+              if (!reg_phone.test(mobile)) {
+                  $('.help-trip-phone').show().html("请输入正确手机号")
+              }
+              if ($("input[name= 'company']").val() === '') {
+                  $('.help-trip-company').show().html("请输入您所在的公司/团队名称")
+              }
+              if ($("input[name= 'code']").val().length !== 4) {
+                  $('.help-trip-code').show().html("请输入正确验证码")
+              }
+
+              if (reg_phone.test(mobile) && $("input[name= 'company']").val() !== '' && $("input[name= 'code']").val().length === 4) {
+                  
+                  $.ajax({
+                      type: 'post',
+                      dataType: 'json',
+                      url: '/admin/bindMobile',
+                      data: {
+                          admin_id: admin_id,
+                          code: $("input[name= 'code']").val(),
+                          mobile: mobile,
+                          company_name: company_name ? '' : $("input[name= 'company']").val() 
+                      },
+                      success: function (res) {
+                          if (res.code === 0) {
+                            window.open(res.data.redirect_url, '_self')
+                          }
+                      }
+                  })
+              }
+              })
+
+              $(document).off('click', '.close').on('click', '.close', function () {
+                $('.dialog').hide()
+                $('.dialogBg').hide()
+              })
+
+              $(document).off('mouseover', '.single-p').on('mouseover', '.single-p', function () {
+                $('.single-p').removeClass("single-p-show")
+                $('.main-title').removeClass("main-title-show")
+                $('.content-div').removeClass("content-div-show")
+                $('.content-div').hide()
+                $(this).addClass("single-p-show")
+                $(this).find('.main-title').addClass("main-title-show")
+                $(this).find('.content-div').addClass("content-div-show")
+                $(this).find('.content-div').show()
+                $(this).find('.s-cricle').html("-")
+              })
+              $(document).off('mouseout', '.single-p').on('mouseout', '.single-p', function () {
+                $('.single-p').removeClass("single-p-show")
+                $('.main-title').removeClass("main-title-show")
+                $('.content-div').removeClass("content-div-show")
+                $('.content-div').hide()
+                $('.s-cricle').html("+")
+              })
+    })
+
+</script>
+
+</body>
+</html>
