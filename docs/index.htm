@@ -69,7 +69,27 @@
         _ga.init(457791);
     </script>
 
-    
+       <!-- redirect to mobile page -->
+    <meta http-equiv="mobile-agent" content="format=xhtml;url=https://www.chuyangedu.gq/mobile.html">
+    <script type="text/javascript">
+	if(window.location.toString().indexOf('pref=padindex') != -1)
+	{}
+	else
+	{
+		if(/AppleWebKit.*Mobile/i.test(navigator.userAgent) || (/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/.test(navigator.userAgent)))
+	{
+		if(window.location.href.indexOf("?mobile")<0)
+	{
+		try
+	{
+		if(/Android|Windows Phone|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent))
+		{window.location.href="https://www.chuyangedu.gq/mobile.html";}
+		else if(/iPad/i.test(navigator.userAgent)){}else{}}catch(e){}}}}
+    </script>
+
+
+    <!-- end of customization: redirect to mobile page -->
+
     <script type="text/javascript">
                     </script>
     <script type="text/javascript" src="page.min.js-_v=202107161616" tppabs="https://static.xcx.gw66.vip/visual-editor/js/page.min.js?_v=202107161616"></script>
